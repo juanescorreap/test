@@ -2,15 +2,21 @@ name: Ejecutar notebook diario
 
 on:
   schedule:
-    - cron: '0 22 * * *'  # todos los días a las 10:00 UTC
-  workflow_dispatch:       # permite ejecución manual
+    - cron: '0 22 * * *'  # Todos los días a las 5 AM Colombia
+  workflow_dispatch:       # Permite ejecución manual
 
 jobs:
   run:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
-      - name: Instalar papermill
-        run: pip install papermill
+
+      - name: Instalar dependencias
+        run: |
+          python -m pip install --upgrade pip
+          pip install jupyter papermill ipykernel
+          python -m ipykernel install --user  # registra el kernel "python3"
+
       - name: Ejecutar notebook
         run: papermill test.ipynb output.ipynb
