@@ -1,0 +1,16 @@
+name: Ejecutar notebook diario
+
+on:
+  schedule:
+    - cron: '0 22 * * *'  # todos los días a las 10:00 UTC
+  workflow_dispatch:       # permite ejecución manual
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Instalar papermill
+        run: pip install papermill
+      - name: Ejecutar notebook
+        run: papermill test.ipynb output.ipynb
