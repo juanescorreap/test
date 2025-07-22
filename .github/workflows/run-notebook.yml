@@ -2,7 +2,7 @@ name: Ejecutar notebook diario
 
 on:
   schedule:
-    - cron: '0 10 * * *'  # Todos los días a las 5 AM Colombia
+    - cron: '0 22 * * *'  # Todos los días a las 5 AM Colombia
   workflow_dispatch:
 
 jobs:
